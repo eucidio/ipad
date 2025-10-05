@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suche mit dem iPad – Arbeitsblatt</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', sans-serif;
+      background-color: #f6f8fb;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2a6bbf;
+    }
+    .instructions {
+      background-color: #e8f1fc;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .question {
+      background-color: #ffffff;
+      border: 2px solid #cce0ff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+    textarea {
+      height: 80px;
+      resize: vertical;
+    }
+    .submit-note {
+      background-color: #2a6bbf;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 20px; /* Adicionado margem para o botão final */
+    }
+    .submit-note:hover {
+      background-color: #1f5396;
+    }
+    .student-info {
+      background: #fff8e6;
+      border: 2px solid #ffd77a;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 14px 0 20px;
+    }
+    .student-info .row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 6px 0;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 20px 0 40px;
+    }
+    .btn {
+      background-color: #2a6bbf;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn.secondary {
+      background-color: #6c8fc4;
+    }
+    .btn.danger {
+      background-color: #d9534f;
+    }
+    .btn:hover { opacity: 0.95; }
+    
+    /* Regras para esconder elementos na impressão */
+    @media print {
+      .instructions, .student-info, .buttons, .submit-note {
+        display: none;
+      }
+      /* Ajusta o layout para impressão, se necessário */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>📱 Suche mit dem iPad</h1>
+
+  <div class="student-info">
+    <div class="row">
+      <label for="student-name">👧👦 Name:</label>
+      <input id="student-name" type="text" placeholder="Dein Name..." />
+    </div>
+    <div class="row">
+      <label for="student-class">🏫 Klasse:</label>
+      <input id="student-class" type="text" placeholder="z. B. 3A" />
+    </div>
+    <div class="row">
+      <label for="student-date">📅 Datum:</label>
+      <input id="student-date" type="date" />
+    </div>
+  </div>
+
+  <div class="instructions">
+    <p><strong>So machst du die Aufgabe:</strong></p>
+    <ol>
+      <li>Öffne die App <b>FragFinn</b>.</li>
+      <li>Öffne auch die App <b>Notizen</b>.</li>
+      <li>Suche mit FragFinn nach diesen Themen:</li>
+      <ul>
+        <li>Was ist die Geschichte von Sankt Martin?</li>
+        <li>Warum feiern wir den Tag der Deutschen Einheit?</li>
+        <li>Welche Apps benutzen Kinder in Deutschland?</li>
+      </ul>
+      <li>Wähle bei jeder Suche eine gute Seite aus.</li>
+      <li>Schreibe unten:</li>
+      <ul>
+        <li>den <b>Titel</b> der Seite</li>
+        <li>die <b>Adresse (Link)</b></li>
+        <li>eine <b>kurze Zusammenfassung</b></li>
+        <li><b>Warum du diese Seite gewählt hast</b></li>
+      </ul>
+      <li>Wenn du fertig bist: Klicke auf **"PDF erstellen & Teilen"**, wähle **AirDrop** und sende ao teu professor. ✈️</li>
+    </ol>
+  </div>
+
+  <div class="question">
+    <h3>1️⃣ Was ist die Geschichte von Sankt Martin?</h3>
+    <label>Titel:</label>
+    <input type="text" placeholder="Schreibe hier den Titel..." />
+    <label>Adresse (Link):</label>
+    <input type="text" placeholder="Schreibe hier den Link..." />
+    <label>Zusammenfassung:</label>
+    <textarea placeholder="Schreibe hier eine kurze Zusammenfassung..."></textarea>
+    <label>Warum hast du diese Seite gewählt?</label>
+    <textarea placeholder="Schreibe hier deine Antwort..."></textarea>
+  </div>
+
+  <div class="question">
+    <h3>2️⃣ Warum feiern wir den Tag der Deutschen Einheit?</h3>
+    <label>Titel:</label>
+    <input type="text" placeholder="Schreibe hier den Titel..." />
+    <label>Adresse (Link):</label>
+    <input type="text" placeholder="Schreibe hier den Link..." />
+    <label>Zusammenfassung:</label>
+    <textarea placeholder="Schreibe hier eine kurze Zusammenfassung..."></textarea>
+    <label>Warum hast du diese Seite gewählt?</label>
+    <textarea placeholder="Schreibe hier deine Antwort..."></textarea>
+  </div>
+
+  <div class="question">
+    <h3>3️⃣ Welche Apps benutzen Kinder in Deutschland?</h3>
+    <label>Titel:</label>
+    <input type="text" placeholder="Schreibe hier den Titel..." />
+    <label>Adresse (Link):</label>
+    <input type="text" placeholder="Schreibe hier den Link..." />
+    <label>Zusammenfassung:</label>
+    <textarea placeholder="Schreibe hier eine kurze Zusammenfassung..."></textarea>
+    <label>Warum hast du diese Seite gewählt?</label>
+    <textarea placeholder="Schreibe hier deine Antwort..."></textarea>
+  </div>
+
+  <div class="buttons">
+    <button class="btn secondary" type="button" onclick="window.print()">📤 PDF erstellen & Teilen</button>
+    <button class="btn danger" type="button" onclick="clearAll()">🧹 Alles löschen</button>
+  </div>
+  
+  <button class="submit-note" type="button" onclick="alert('SCHRITTE ZUM TEILEN: 1. Klicke auf **PDF erstellen & Teilen**. 2. Na tela de impressão, faça o gesto de PINÇAR para transformar em PDF. 3. Clique no botão de compartilhamento (quadrado com seta) e escolha **AirDrop** para enviar ao professor Eucidio Pimenta Arruda. ✈️')">Fertig! AirDrop an Herrn Arruda schicken ✈️ (Anleitung)</button>
+
+  <script>
+    // Datum automatisch auf heute setzen
+    (function() {
+      const d = document.getElementById('student-date');
+      if (d && !d.value) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        d.value = `${yyyy}-${mm}-${dd}`;
+      }
+    })();
+
+    // A função collectData e downloadAnswers não são mais necessárias para o novo fluxo (PDF/Compartilhamento)
+    /*
+    function collectData() { ... }
+    function downloadAnswers() { ... }
+    */
+
+    function clearAll() {
+      if (!confirm('Alles löschen?')) return;
+      document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+      // Datum neu setzen
+      const d = document.getElementById('student-date');
+      if (d) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        d.value = `${yyyy}-${mm}-${dd}`;
+      }
+    }
+  </script>
+</body>
+</html>
