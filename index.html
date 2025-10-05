@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -56,7 +57,7 @@
       font-size: 16px;
       cursor: pointer;
       width: 100%;
-      margin-bottom: 20px; /* Adicionado margem para o botão final */
+      margin-bottom: 20px;
     }
     .submit-note:hover {
       background-color: #1f5396;
@@ -99,12 +100,11 @@
     }
     .btn:hover { opacity: 0.95; }
     
-    /* Regras para esconder elementos na impressão */
+    /* Regras de impressão não são mais necessárias, mas vamos deixá-las como fallback */
     @media print {
       .instructions, .student-info, .buttons, .submit-note {
         display: none;
       }
-      /* Ajusta o layout para impressão, se necessário */
       body {
         margin: 0;
         padding: 0;
@@ -133,23 +133,10 @@
   <div class="instructions">
     <p><strong>So machst du die Aufgabe:</strong></p>
     <ol>
-      <li>Öffne die App <b>FragFinn</b>.</li>
-      <li>Öffne auch die App <b>Notizen</b>.</li>
-      <li>Suche mit FragFinn nach diesen Themen:</li>
-      <ul>
-        <li>Was ist die Geschichte von Sankt Martin?</li>
-        <li>Warum feiern wir den Tag der Deutschen Einheit?</li>
-        <li>Welche Apps benutzen Kinder in Deutschland?</li>
-      </ul>
-      <li>Wähle bei jeder Suche eine gute Seite aus.</li>
-      <li>Schreibe unten:</li>
-      <ul>
-        <li>den <b>Titel</b> der Seite</li>
-        <li>die <b>Adresse (Link)</b></li>
-        <li>eine <b>kurze Zusammenfassung</b></li>
-        <li><b>Warum du diese Seite gewählt hast</b></li>
-      </ul>
-      <li>Wenn du fertig bist: Klicke auf **"PDF erstellen & Teilen"**, wähle **AirDrop** und sende ao teu professor. ✈️</li>
+      <li>Öffne die App <b>FragFinn</b> und die App <b>Notizen</b>.</li>
+      <li>Suche mit FragFinn nach den Themen und fülle das Formular aus.</li>
+      <li>Wenn du fertig bist, klicke auf **"Antworten als TXT speichern"**.</li>
+      <li>Schicke die gespeicherte TXT-Datei mit **AirDrop** an das iPad von <b>Eucidio Pimenta Arruda</b>. ✈️</li>
     </ol>
   </div>
 
@@ -190,11 +177,11 @@
   </div>
 
   <div class="buttons">
-    <button class="btn secondary" type="button" onclick="window.print()">📤 PDF erstellen & Teilen</button>
+    <button class="btn" type="button" onclick="downloadAnswers()">💾 Antworten als TXT speichern</button>
     <button class="btn danger" type="button" onclick="clearAll()">🧹 Alles löschen</button>
   </div>
   
-  <button class="submit-note" type="button" onclick="alert('SCHRITTE ZUM TEILEN: 1. Klicke auf **PDF erstellen & Teilen**. 2. Na tela de impressão, faça o gesto de PINÇAR para transformar em PDF. 3. Clique no botão de compartilhamento (quadrado com seta) e escolha **AirDrop** para enviar ao professor Eucidio Pimenta Arruda. ✈️')">Fertig! AirDrop an Herrn Arruda schicken ✈️ (Anleitung)</button>
+  <button class="submit-note" type="button" onclick="alert('1. Klicke auf **Antworten als TXT speichern** (acima). 2. A TXT-Datei wird in deinen Downloads gespeichert. 3. Öffne die App **Dateien** (Arquivos) auf deinem iPad. 4. Finde die TXT-Datei und teile sie via **AirDrop** an Herrn Arruda. ✈️')">Fertig! AirDrop an Herrn Arruda schicken ✈️ (Anleitung)</button>
 
   <script>
     // Datum automatisch auf heute setzen
@@ -209,11 +196,53 @@
       }
     })();
 
-    // A função collectData e downloadAnswers não são mais necessárias para o novo fluxo (PDF/Compartilhamento)
-    /*
-    function collectData() { ... }
-    function downloadAnswers() { ... }
-    */
+    function collectData() {
+      const name = (document.getElementById('student-name')?.value || '').trim();
+      const klass = (document.getElementById('student-class')?.value || '').trim();
+      const datum = (document.getElementById('student-date')?.value || '').trim();
+      const sections = Array.from(document.querySelectorAll('.question'));
+
+      const lines = [];
+      lines.push('Suche mit dem iPad – Ergebnisse');
+      lines.push('Name: ' + name);
+      lines.push('Klasse: ' + klass);
+      lines.push('Datum: ' + datum);
+      lines.push('');
+
+      sections.forEach((sec, idx) => {
+        const title = sec.querySelector('h3')?.innerText || `Frage ${idx+1}`;
+        const inputs = sec.querySelectorAll('input');
+        const areas = sec.querySelectorAll('textarea');
+        const t = inputs[0]?.value || '';
+        const link = inputs[1]?.value || '';
+        const sum = areas[0]?.value || '';
+        const why = areas[1]?.value || '';
+        lines.push('— ' + title);
+        lines.push('Titel: ' + t);
+        lines.push('Adresse: ' + link);
+        lines.push('Zusammenfassung: ' + sum);
+        lines.push('Warum gewählt: ' + why);
+        lines.push('');
+      });
+      return lines.join('\n');
+    }
+
+    function downloadAnswers() {
+      const content = collectData();
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const name = (document.getElementById('student-name')?.value || 'Schueler');
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Suche_iPad_${name.replace(/\s+/g,'_')}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      
+      // Alerta para confirmar que o download foi iniciado
+      alert('Speichern abgeschlossen! Die Datei wurde in deinen Downloads gesichert. Klicke auf "Fertig! AirDrop an Herrn Arruda schicken" für die nächsten Schritte.');
+    }
 
     function clearAll() {
       if (!confirm('Alles löschen?')) return;
